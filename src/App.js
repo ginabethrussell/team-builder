@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import TeamList from './components/TeamList';
-import Form from './components/Form';
+import TeamForm from './components/TeamForm';
 const team = [
   {
     id: 1,
@@ -56,7 +56,7 @@ function App() {
     <div className="App">
       <h1>Russell Web Development Team</h1>
       <TeamList teamMembers={teamMembers} selectMemberToEdit={selectMemberToEdit}/> 
-      <Form addTeamMember={addTeamMember} editTeamMember={editTeamMember} memberToEdit={memberToEdit} />
+      <TeamForm addTeamMember={addTeamMember} editTeamMember={editTeamMember} memberToEdit={memberToEdit} />
     </div>
   );
 }

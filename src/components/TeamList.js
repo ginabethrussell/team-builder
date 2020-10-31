@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Card,CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+  } from 'reactstrap';
 
 export default function TeamList(props) {
     const {teamMembers, selectMemberToEdit} = props;
@@ -7,14 +11,22 @@ const editTeamMember = (member) => {
     selectMemberToEdit(member);
 };
     return (  
-        teamMembers.map( member => (
-            <div key={member.id} className='teamMember'>
-                <h3>{member.name}</h3>
-                <p>{member.email}</p>
-                <p>{member.role}</p>
-                <button onClick={() => editTeamMember(member)}>Edit</button>
-            </div>
+        <div className="team">
+            {
+            teamMembers.map( member => (
+                <Card key={member.id} className='teamMember'>
+                    <CardBody>
+                        <CardText>
+                            <CardTitle>{member.name}</CardTitle>
+                            <CardText>{member.email}</CardText>
+                            <CardText>{member.role}</CardText>
+                        </CardText>
+                    <Button color='warning' onClick={() => editTeamMember(member)}>Edit</Button>
+                    </CardBody>
+                </Card>
+                )
             )
-        )
+            }           
+        </div>
     )
 }
