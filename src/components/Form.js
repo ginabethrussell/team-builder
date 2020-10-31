@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 export default function Form(props){
-    const {addTeamMember, memberToEdit, editTeamMember} = props;
+    const {addTeamMember, editTeamMember, memberToEdit} = props;
 
     const [teamMember, setTeamMember] = useState(
         {
@@ -9,23 +9,22 @@ export default function Form(props){
             email: '',
             role: ''
         });
-
+   
     useEffect(()=> {
         setTeamMember(memberToEdit);
     },[memberToEdit]);
-
+    
     const handleChanges = (event) => {
         setTeamMember({...teamMember, [event.target.name]: event.target.value});
-        console.log(event.target.name);
-        console.log(event.target.value);
     };
 
     const submitForm = (event) => {
         event.preventDefault();
-        if(!memberToEdit){
-            addTeamMember(teamMember);
-        }else{
+       
+        if (memberToEdit){
             editTeamMember(teamMember);
+        }else{
+            addTeamMember(teamMember);
         }
         
         setTeamMember({
@@ -71,7 +70,11 @@ export default function Form(props){
                 required
                 />
                 <br />
-                <button type='submit'>Add Team Member</button>
+                <button type='submit'>
+                {
+                    !memberToEdit? 'Add Team Member': 'Edit Team Member'
+                }
+                    </button>
             </form>
         </div>
     )  

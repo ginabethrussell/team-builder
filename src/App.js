@@ -4,50 +4,59 @@ import TeamList from './components/TeamList';
 import Form from './components/Form';
 const team = [
   {
+    id: 1,
     name: "Matthew Russell",
     email: 'mbr4477@gmail.com',
     role: 'Senior Engineer'
   },
   {
+    id: 2,
     name: "Gina Russell",
     email: 'grussell@gmail.com',
     role: 'Junior Engineer'
-    }, 
-    {
+  }, 
+  {
+    id: 3,
     name: "Nathan Russell",
     email: 'ndr4477@gmail.com',
     role: 'Business Manager'
-    }
+  }
 ];
 
 function App() {
   const [teamMembers, setTeamMembers] = useState(team);
-  const [memberToEdit, setMemberToEdit] = useState({});
+  const [memberToEdit, setMemberToEdit] = useState('');
 
   const addTeamMember = (teamMember) => {
+    console.log(teamMember);
+    teamMember.id = Date.now();
     setTeamMembers([...teamMembers, teamMember]);
   };
+
   const selectMemberToEdit = (member) => {
     setMemberToEdit(member);
   };
+
   const editTeamMember = (teamMember) => {
-    teamMembers.map(member => {
-      if(member.key === teamMember.key){
+   
+    const currentTeamMembers = [...teamMembers];
+    const newTeamList = currentTeamMembers.map(member => {
+      if(member.id === teamMember.id){
         member.name = teamMember.name;
         member.email = teamMember.email;
         member.role =  teamMember.role;
         }
-      }
-    )   
+        return member;
+      });
+    setTeamMembers(newTeamList);
+    setMemberToEdit('');
     };
-
-  console.log(memberToEdit);
 
   return (
     <div className="App">
       <h1>Russell Web Development Team</h1>
       <TeamList teamMembers={teamMembers} selectMemberToEdit={selectMemberToEdit}/> 
-      <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editTeamMember={editTeamMember}/>
+      <Form addTeamMember={addTeamMember} editTeamMember={editTeamMember} memberToEdit={memberToEdit} />
     </div>
   );
 }
