@@ -1,0 +1,25 @@
+.App {
+  width: 75%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+h1 {
+  padding-top: 25px;
+}
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+}
+.teamMember {
+  width: 250px;
+  margin-bottom: 16px;
+}
+
+.form {
+  text-align: left;
+  width: 30%;
+  margin-top: 50px;
+}
