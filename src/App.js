@@ -22,17 +22,32 @@ const team = [
 
 function App() {
   const [teamMembers, setTeamMembers] = useState(team);
-  console.log(teamMembers);
+  const [memberToEdit, setMemberToEdit] = useState({});
 
   const addTeamMember = (teamMember) => {
     setTeamMembers([...teamMembers, teamMember]);
-  }
-  
+  };
+  const selectMemberToEdit = (member) => {
+    setMemberToEdit(member);
+  };
+  const editTeamMember = (teamMember) => {
+    teamMembers.map(member => {
+      if(member.key === teamMember.key){
+        member.name = teamMember.name;
+        member.email = teamMember.email;
+        member.role =  teamMember.role;
+        }
+      }
+    )   
+    };
+
+  console.log(memberToEdit);
+
   return (
     <div className="App">
       <h1>Russell Web Development Team</h1>
-      <TeamList teamMembers={teamMembers}/> 
-      <Form addTeamMember={addTeamMember}/>
+      <TeamList teamMembers={teamMembers} selectMemberToEdit={selectMemberToEdit}/> 
+      <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editTeamMember={editTeamMember}/>
     </div>
   );
 }

@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export default function Form(props){
-    const {addTeamMember} = props;
+    const {addTeamMember, memberToEdit, editTeamMember} = props;
+
     const [teamMember, setTeamMember] = useState(
         {
             name: '',
             email: '',
             role: ''
         });
+
+    useEffect(()=> {
+        setTeamMember(memberToEdit);
+    },[memberToEdit]);
 
     const handleChanges = (event) => {
         setTeamMember({...teamMember, [event.target.name]: event.target.value});
@@ -17,7 +22,12 @@ export default function Form(props){
 
     const submitForm = (event) => {
         event.preventDefault();
-        addTeamMember(teamMember);
+        if(!memberToEdit){
+            addTeamMember(teamMember);
+        }else{
+            editTeamMember(teamMember);
+        }
+        
         setTeamMember({
             name: '',
             email: '',
